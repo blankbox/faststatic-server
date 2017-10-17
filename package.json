@@ -1,0 +1,40 @@
+{
+  "name": "faststatic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-scss": "node-sass -w -r cdn/amc/scss/ -o cdn/amc/css/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.133.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
+    "cookie-parser": "^1.4.3",
+    "etag": "^1.8.1",
+    "express": "^4.16.2",
+    "fs-extra": "^4.0.2",
+    "git-branch": "^1.0.0",
+    "glob": "^7.1.2",
+    "helmet": "^3.9.0",
+    "jsondiffpatch": "^0.2.4",
+    "jsonschema": "^1.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "md5": "^2.2.1",
+    "mime-types": "^2.1.17",
+    "redis": "^2.8.0",
+    "serve-index": "^1.9.1",
+    "slack-node": "^0.1.8",
+    "tracer": "^0.8.11",
+    "validator": "^8.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "node-sass": "^4.5.3"
+  }
+}
