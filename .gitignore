@@ -39,6 +39,8 @@ jspm_packages
 # Environment variables
 .env
 
+.DS_Store
+
 # Ignoring production site.json file for security reasons
 *.pro.json
 
