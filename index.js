@@ -28,25 +28,19 @@ const retry_strategy = function (options) {
     return Math.min(options.attempt * 100, 3000);
 };
 
-function load (redisConfig) {
+function load (options) {
   // Set up all required redis connections
-  if (typeof redisConfig.cms.retry_strategy === 'undefined') {
-    redisConfig.cms.retry_strategy = retry_strategy;
+  if (typeof options.cms.retry_strategy === 'undefined') {
+    options.cms.retry_strategy = retry_strategy;
   }
-  let cms = redis.createClient(redisConfig.cms);
-  if (typeof redisConfig.users.retry_strategy === 'undefined') {
-    redisConfig.users.retry_strategy = retry_strategy;
+  let cms = redis.createClient(options.cms);
+  if (typeof options.users.retry_strategy === 'undefined') {
+    options.users.retry_strategy = retry_strategy;
   }
-  let users = redis.createClient(redisConfig.users);
 
   // show error in console
   cms.on("error", function (err) {
       console.log("CMS Error " + err);
-  });
-
-  // show error in console
-  users.on("error", function (err) {
-      console.log("User Error " + err);
   });
 
   // Begin the intial app
@@ -85,7 +79,7 @@ function load (redisConfig) {
   const permitCheck = require('./libs/permitCheck');
   const siteEnabledCheck = require('./libs/siteEnabledCheck')(cms);
   const formPostProcessor = require('./libs/formPostProcessor');
-  const loginformProcessor = require('./libs/loginformProcessor')(users);
+  const loginformProcessor = require('./libs/loginformProcessor')(cms);
   const logoutProcessor = require('./libs/logoutProcessor');
   const generatePage = require('./libs/generatePage')(cms);
 
