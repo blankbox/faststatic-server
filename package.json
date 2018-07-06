@@ -30,6 +30,7 @@
     "serve-index": "^1.9.1",
     "slack-node": "^0.1.8",
     "tracer": "^0.8.11",
+    "underscore": "^1.8.3",
     "validator": "^8.2.0"
   },
   "devDependencies": {

@@ -3,6 +3,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const redis = require("redis");
+const db = require('./db');
 
 // Needed for POST and cookies to work in Express
 const bodyParser = require('body-parser');
@@ -76,19 +77,23 @@ function load (options) {
   }
 
   // Attach all the application middleware
+  const loadGraph = require('./libs/loadGraph')(db);
   const permitCheck = require('./libs/permitCheck');
-  const siteEnabledCheck = require('./libs/siteEnabledCheck')(cms);
+  // const siteEnabledCheck = require('./libs/siteEnabledCheck')(cms);
   const formPostProcessor = require('./libs/formPostProcessor');
-  const loginformProcessor = require('./libs/loginformProcessor')(cms);
-  const logoutProcessor = require('./libs/logoutProcessor');
+  // const loginformProcessor = require('./libs/loginformProcessor')(cms);
+  // const logoutProcessor = require('./libs/logoutProcessor');
   const generatePage = require('./libs/generatePage')(cms);
+  const cacheRequest = require('./libs/cacheRequest')(cms);
 
+  app.use(loadGraph);
   app.use(permitCheck);
-  app.use(siteEnabledCheck);
+  // app.use(siteEnabledCheck);
   app.post('/form', formPostProcessor);
-  app.post('/login', loginformProcessor);
-  app.all('/logout', logoutProcessor);
+  // app.post('/login', loginformProcessor);
+  // app.all('/logout', logoutProcessor);
   app.use(generatePage);
+  app.use(cacheRequest);
 
   return app;
 
